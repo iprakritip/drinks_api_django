@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 
 @api_view(['GET','POST'])
-def drink_list(request):
+def drink_list(request,format=None):
     if request.method=='GET':
         drinks=Drink.objects.all()
         serializer=DrinkSerializer(drinks, many=True)
@@ -20,7 +20,7 @@ def drink_list(request):
             return Response(serializer.data, status= HTTPStatus.CREATED)
 
 @api_view(['GET','PUT','DELETE'])
-def drink_detail(request,id):
+def drink_detail(request,id,format=None):
     try:
         drink = Drink.objects.get(pk=id)
     except Drink.DoesNotExist:
