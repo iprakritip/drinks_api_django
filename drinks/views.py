@@ -29,7 +29,12 @@ def drink_detail(request,id):
     if request.method == 'GET':
         serializer = DrinkSerializer(drink)
         return Response(serializer.data, status=HTTPStatus.OK)
+
     elif request.method == 'PUT':
-        pass
+        serializer=DrinkSerializer(drink, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=HTTPStatus.CREATED)
+        return Response(serializer.errors, status=HTTPStatus.BAD_REQUEST)
     if request.method == 'DELETE':
         pass
