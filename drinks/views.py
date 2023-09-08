@@ -11,7 +11,7 @@ def drink_list(request):
     if request.method=='GET':
         drinks=Drink.objects.all()
         serializer=DrinkSerializer(drinks, many=True)
-        return JsonResponse({'drinks':serializer.data})
+        return Response(serializer.data)
     
     if request.method=='POST':
         serializer =  DrinkSerializer(data=request.data)
