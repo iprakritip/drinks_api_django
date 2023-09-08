@@ -37,4 +37,5 @@ def drink_detail(request,id):
             return Response(serializer.data, status=HTTPStatus.CREATED)
         return Response(serializer.errors, status=HTTPStatus.BAD_REQUEST)
     if request.method == 'DELETE':
-        pass
+        drink.delete()
+        return Response(status=HTTPStatus.NO_CONTENT)
